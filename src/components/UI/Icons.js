@@ -33,6 +33,14 @@ export function IconPen() {
   );
 }
 
+export function IconPlus() {
+  return (
+    <div className="Icon IconPlus">
+      <img src="https://img.icons8.com/external-basicons-line-edtgraphics/50/undefined/external-add-ui-basic-basicons-line-edtgraphics-2.png" alt="Pen icon" />
+    </div>
+  );
+}
+
 export function IconRedCross() {
   return (
     <div className="Icon IconRedCross">
@@ -68,6 +76,7 @@ export function IconTrash() {
 export function IconAcknowledge() {
   return (
     <p className="IconAcknowledge">
+      <a href="https://icons8.com/icon/HuX7TPADlc6v/plus">Plus</a>,&nbsp;
       <a href="https://icons8.com/icon/84015/list">List</a>,&nbsp;
       <a href="https://icons8.com/icon/11220/people">People</a>,&nbsp;
       <a href="https://icons8.com/icon/11997/close">Close</a>,&nbsp;
