@@ -5,7 +5,6 @@ import ModuleCard from '../UI/ModuleCard.js';
 import { ActionTray, ActionAdd } from '../UI/Actions.js';
 import Modal from '../UI/Modal.js';
 
-
 export default function MyModules() {
   // Properties ----------------------------------
   const API_URL = 'https://my.api.mockaroo.com/';
@@ -13,7 +12,7 @@ export default function MyModules() {
   
   // Hooks ---------------------------------------
   const [loadingMessage, setLoadingMessage] = useState("Loading records ...");
-  const [modules, setModules] = useState(null);
+  const [modules, setModules] = useState(undefined);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => { fetchModules() }, []);
@@ -25,7 +24,7 @@ export default function MyModules() {
     else setLoadingMessage(`Error ${outcome.response.status}: Modules could not be found.`);
   }
 
-  const handleAddModule = () => console.log("Add new module");
+  const handleAddModule = () => {}
 
   // View ----------------------------------------
   return (

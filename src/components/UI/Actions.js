@@ -60,6 +60,16 @@ export function ActionDelete({ onClick, withText=false }) {
   );
 }
 
+ActionDismiss.propTypes = ActionPropTypes;
+
+export function ActionDismiss({ onClick, withText=false }) {
+  return (
+    <button className="Action" onClick={onClick}>
+      <IconCross /> {withText && <p>Dismiss</p>}
+    </button>
+  );
+}
+
 ActionFavourites.propTypes = ActionPropTypes;
 
 export function ActionFavourites({ onClick, withText=false }) {
