@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { apiRequest }  from '../api/apiRequest.js';
 import { CardContainer } from '../UI/Card.js';
 import ModuleCard from '../UI/ModuleCard.js';
-import { ActionTray, ActionAdd } from '../UI/Actions.js';
+import { ActionTray, ActionAdd, ActionSubmit, ActionDismiss } from '../UI/Actions.js';
 import Modal from '../UI/Modal.js';
 
 export default function MyModules() {
@@ -24,7 +24,9 @@ export default function MyModules() {
     else setLoadingMessage(`Error ${outcome.response.status}: Modules could not be found.`);
   }
 
-  const handleAddModule = () => {}
+  const handleAdd = () => setShowModal(true);
+  const handleDismiss = () => setShowModal(false);
+  const handleSubmit = () => console.log('Add');
 
   // View ----------------------------------------
   return (
@@ -32,7 +34,7 @@ export default function MyModules() {
       <h1>My Modules</h1>
 
       <ActionTray>
-          <ActionAdd withText onClick={handleAddModule} />
+          <ActionAdd withText onClick={handleAdd} />
       </ActionTray>
 
       {
@@ -51,8 +53,16 @@ export default function MyModules() {
 
       {
         showModal &&
-          <Modal title="Add new module">
-            <div>What!!</div>
+          <Modal
+            title="Add new module"
+            actions={[ <ActionDismiss key="ActionDismiss" withText onClick={handleDismiss} /> ]}
+          >
+            <form onSubmit={handleSubmit}>
+              <label>Module name
+                <input type="text" value="Some string" />
+              </label>
+              <ActionSubmit onClick={handleSubmit} withText />
+            </form>
           </Modal>
       }
     </>
