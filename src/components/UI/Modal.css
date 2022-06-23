@@ -43,7 +43,7 @@ main.ModalPane header {
 main.ModalPane main.ModalContent {
   /* Appearance */
   width: 100%;
-  padding: 10px;
+  padding: 20px;
   color: Black;
   font-size: 100%;
 

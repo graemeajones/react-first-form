@@ -16,10 +16,7 @@ export default function Navbar() {
         <NavLink to='/' className={getLinkStyle}>My Modules</NavLink>
       </div>
       <div className="navItem">
-        <NavLink to='/assessments' className={getLinkStyle}>My Assessments</NavLink>
-      </div>
-      <div className="navItem">
-        <NavLink to='/schedule' className={getLinkStyle}>My Schedule</NavLink>
+        <NavLink to='/assessments' className={getLinkStyle}>Add Module</NavLink>
       </div>
     </nav>
   )

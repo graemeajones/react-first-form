@@ -4,6 +4,7 @@ import { ActionTray, ActionSubmit, ActionDismiss } from '../UI/Actions.js';
 import toCamelCase from '../utils/toCamelCase.js';
 import './Form.scss';
 
+
 export function Form({ children, onSubmit, onChange, onCancel }) {
   // Properties ----------------------------------
   // Hooks ---------------------------------------
@@ -11,7 +12,7 @@ export function Form({ children, onSubmit, onChange, onCancel }) {
   // Methods -------------------------------------
   // View ----------------------------------------
   return (
-    <form className="Form" onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="Form Bordered">
       <div className="FormTray">
         {
           // children.map((item) => item)
@@ -65,15 +66,9 @@ export const useFormState = (initialFormObject) => {
   const [errorObject, setErrorObject] = useState(
     Object.keys(initialFormObject).reduce((accum, key) => ({ ...accum, [key]: null }), {}));
 
-  // State Modifiers -----------------------------
+  // State Modifier ------------------------------
   const handleChange = (event) => setFormObject({ ...formObject, [event.target.name]: event.target.value });
   
-  const updateErrorObject = (key, value) => {
-    console.log("Key: " + key + " Value: " + value);
-    setErrorObject({ ...errorObject, [key]: value });
-    console.log("After error: "  + errorObject.key);
-  }
-
   // Return --------------------------------------
   return [formObject, handleChange, errorObject, setErrorObject ];
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { apiRequest }  from '../../api/apiRequest.js';
 import { Form, FormItem, useFormState } from '../../UI/Form.js';
 
+
 export default function AddModuleForm({ onSubmit, onCancel }) {
   // Properties ----------------------------------
   const initialModule = {
@@ -28,24 +29,27 @@ export default function AddModuleForm({ onSubmit, onCancel }) {
   }
 
   // Hooks ---------------------------------------
-  const [module, handleChange, errors, updateErrors ] = useFormState(initialModule);
+  const [module, handleChange, errors, updateErrors] = useFormState(initialModule);
   
   // Methods -------------------------------------
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const errorN = isValidateModuleName() ? null : "Module name is too short";
-    const errorC = isValidateModuleCode() ? null : "Module code is not a valid format";
-    const errorY = isValidateModuleLevel() ? null : "Invalid module level";
-    const errorL = isValidateModuleLeader() ? null : "No module leader has been selected";
-    const errorI = isValidateModuleImage() ? null : "Module image is not a valid URL";
+    const isValidName = isValidateModuleName();
+    const isValidCode = isValidateModuleCode();
+    const isValidYear = isValidateModuleLevel();
+    const isValidLead = isValidateModuleLeader();
+    const isValidImage = isValidateModuleImage();
 
     updateErrors({
-      ModuleName: errorN, ModuleCode: errorC, ModuleLevel: errorY,
-      ModuleLeaderID: errorL, ModuleImage: errorI
+      ModuleName: isValidName ? null : "Module name is too short",
+      ModuleCode: isValidCode ? null : "Module code is not a valid format",
+      ModuleLevel: isValidYear ? null : "Invalid module level",
+      ModuleLeaderID: isValidLead ? null : "No module leader has been selected",
+      ModuleImage: isValidImage ? null : "Module image is not a valid URL"
     });
 
-    if (!errorN && !errorC && !errorY && !errorL && !errorI ) onSubmit(module);
+    if (isValidName && isValidCode && isValidYear && isValidLead && isValidImage) onSubmit(module);
   }
 
   const isValidateModuleName = () => module.ModuleName.length > 8 ? true : false;
@@ -58,7 +62,7 @@ export default function AddModuleForm({ onSubmit, onCancel }) {
 
   // View ----------------------------------------
   return (
-    <Form onSubmit={handleSubmit} onChange={handleChange} onCancel={onCancel}>
+    <Form onSubmit={handleSubmit} onChange={handleChange} onCancel={onCancel} >
       <FormItem
         label="Module name"
         error={errors.ModuleName}

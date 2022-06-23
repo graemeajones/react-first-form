@@ -1,5 +1,7 @@
+import AddModuleForm from '../entities/Modules/AddModuleForm';
 
-export default function MyAssessments() {
+
+export default function MyAssessments({ onSubmit, onCancel }) {
   // Properties ----------------------------------
   // Hooks ---------------------------------------
   // Context -------------------------------------
@@ -7,9 +9,9 @@ export default function MyAssessments() {
   // View ----------------------------------------
   return (
     <>
-      <h1>My Assessments</h1>
+      <h1>Add a new module</h1>
       <section>
-        Content
+        <AddModuleForm onSubmit={onSubmit} onCancel={onCancel} className="Bordered"/>
       </section>
     </>
   )
