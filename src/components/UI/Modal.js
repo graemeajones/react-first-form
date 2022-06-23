@@ -26,11 +26,14 @@ export default function Modal({ title, children, actions }) {
           <main className="ModalContent">
             {children}
           </main>
-          <div className="ModalActions">
-            <ActionTray>
-              { actions && actions.map(action => action) }
-            </ActionTray>
-          </div>
+          {
+            actions &&
+            <div className="ModalActions">
+              <ActionTray>
+                { actions.map(action => action) }
+              </ActionTray>
+            </div>
+          }
         </Card>
       </main>
     </div>
