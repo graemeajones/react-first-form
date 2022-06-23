@@ -33,38 +33,32 @@ export default function AddModuleForm({ onSubmit, onCancel }) {
   // Methods -------------------------------------
   const handleSubmit = (event) => {
     event.preventDefault();
-    validateModuleName() &&
-      validateModuleCode() &&
-        validateModuleLevel() &&
-          validateModuleLeader() && 
-            validateModuleImage() &&
-              onSubmit(module);
+
+    const errorN = isValidateModuleName() ? null : "Module name is too short";
+    const errorC = isValidateModuleCode() ? null : "Module code is not a valid format";
+    const errorY = isValidateModuleLevel() ? null : "Invalid module level";
+    const errorL = isValidateModuleLeader() ? null : "No module leader has been selected";
+    const errorI = isValidateModuleImage() ? null : "Module image is not a valid URL";
+
+    updateErrors({
+      ModuleName: errorN, ModuleCode: errorC, ModuleLevel: errorY,
+      ModuleLeaderID: errorL, ModuleImage: errorI
+    });
+
+    if (!errorN && !errorC && !errorY && !errorL && !errorI ) onSubmit(module);
   }
 
-  const validateModuleName = () => {
-    return module.ModuleName.length < 8
-      ? updateErrors("ModuleName", "Module name is too short")
-      : true;
-  }
-
-  const validateModuleCode = () => true;
-  const validateModuleLevel = () => true;
-  const validateModuleLeader = () => true;
-
-  const validateModuleImage = () => {
-    return !isValidURL(module.ModuleImage)
-      ? updateErrors("ModuleImage", "Module image is not a valid URL")
-      : true;
-  }
-
-  const isValidEmail = (value) => (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value));
+  const isValidateModuleName = () => module.ModuleName.length > 8 ? true : false;
+  const isValidateModuleCode = () => isValidModuleCode(module.ModuleCode) ? true : false;
+  const isValidateModuleLevel = () => ((module.ModuleLevel > 2) && (module.ModuleLevel < 8)) ? true : false;
+  const isValidateModuleLeader = () => parseInt(module.ModuleLeaderID) ? true : false;
+  const isValidateModuleImage = () => isValidURL(module.ModuleImage) ? true : false;
+  const isValidModuleCode = (value) => (/\D{2}\d{4}/.test(value));
   const isValidURL = (value) => (/^(http|https):\/\/(([a-zA-Z0-9$\-_.+!*'(),;:&=]|%[0-9a-fA-F]{2})+@)?(((25[0-5]|2[0-4][0-9]|[0-1][0-9][0-9]|[1-9][0-9]|[0-9])(\.(25[0-5]|2[0-4][0-9]|[0-1][0-9][0-9]|[1-9][0-9]|[0-9])){3})|localhost|([a-zA-Z0-9\-\u00C0-\u017F]+\.)+([a-zA-Z]{2,}))(:[0-9]+)?(\/(([a-zA-Z0-9$\-_.+!*'(),;:@&=]|%[0-9a-fA-F]{2})*(\/([a-zA-Z0-9$\-_.+!*'(),;:@&=]|%[0-9a-fA-F]{2})*)*)?(\?([a-zA-Z0-9$\-_.+!*'(),;:@&=/?]|%[0-9a-fA-F]{2})*)?(#([a-zA-Z0-9$\-_.+!*'(),;:@&=/?]|%[0-9a-fA-F]{2})*)?)?$/.test(value));
-  
 
   // View ----------------------------------------
   return (
     <Form onSubmit={handleSubmit} onChange={handleChange} onCancel={onCancel}>
-
       <FormItem
         label="Module name"
         error={errors.ModuleName}
@@ -128,7 +122,7 @@ export default function AddModuleForm({ onSubmit, onCancel }) {
 
       <FormItem
         label="Module image URL"
-        advice="Provide the URL of an image for the module"
+        advice="Provide the URL of an image"
         error={errors.ModuleImage}
       >
         <input
