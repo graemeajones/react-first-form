@@ -110,6 +110,16 @@ export function ActionNo({ onClick, withText=false }) {
   );
 }
 
+ActionSubmit.propTypes = ActionPropTypes;
+
+export function ActionSubmit({ onClick, withText=false }) {
+  return (
+    <button className="Action" onClick={onClick} type="submit">
+      <IconTick /> {withText && <p>Submit</p>}
+    </button>
+  );
+}
+
 ActionSubscribe.propTypes = ActionPropTypes;
 
 export function ActionSubscribe({ onClick, withText=false }) {
