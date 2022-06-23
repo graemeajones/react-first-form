@@ -67,8 +67,13 @@ export const useFormState = (initialFormObject) => {
 
   // State Modifiers -----------------------------
   const handleChange = (event) => setFormObject({ ...formObject, [event.target.name]: event.target.value });
-  const updateErrorObject = (key, value) => setErrorObject({ ...formObject, [key]: value });
+  
+  const updateErrorObject = (key, value) => {
+    console.log("Key: " + key + " Value: " + value);
+    setErrorObject({ ...errorObject, [key]: value });
+    console.log("After error: "  + errorObject.key);
+  }
 
   // Return --------------------------------------
-  return [formObject, handleChange, errorObject, updateErrorObject ];
+  return [formObject, handleChange, errorObject, setErrorObject ];
 }
