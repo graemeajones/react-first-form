@@ -8,15 +8,16 @@ $Green: #29e7cd; // Cyan
 $DarkGreen: darken($Green, 10%);
 $BorderGrey: LightGrey;
 
-.Positive { color: $DarkGreen; }
-
 form.Form {
   width: 100%;
-  padding: 10px; 
-  // margin: 10px;
-  // padding: 20px;
-  // border: 1px solid $BorderGrey;
-  // border-radius: 5px;
+  padding: 10px 0; 
+
+  &.Bordered {
+    margin: 10px 0;
+    padding: 20px;
+    border: 1px solid $BorderGrey;
+    border-radius: 5px;
+  }
 
   div.FormTray {
     width: 100%;
@@ -24,7 +25,7 @@ form.Form {
 
     div.FormItem {
 
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       
       label.FormLabel {
         display: block;
@@ -62,7 +63,7 @@ form.Form {
         &:hover { border: 2px solid $BorderGrey }
         &:focus { border: 2px solid $DarkGreen; }
 
-        &[type="number"] { text-align: center; }
+        &[type="number"] { text-align: left; }
 
         &.FormError {
           border-color: $DarkRed;

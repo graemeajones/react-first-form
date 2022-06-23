@@ -7,7 +7,7 @@ import { ActionTray, ActionAdd } from '../UI/Actions.js';
 import Modal from '../UI/Modal.js';
 
 
-export default function MyModules() {
+export default function MyModules({ handleSubmit, handleCancel }) {
   // Properties ----------------------------------
   const API_URL = 'https://my.api.mockaroo.com/';
   const API_KEY = '?key=bb6adbc0';
@@ -27,10 +27,12 @@ export default function MyModules() {
   }
 
   const handleAdd = () => setShowModal(true);
-  const handleCancel = () => setShowModal(false);
-  const handleSubmit = (newModule) => {
-    //newModule.ModuleLevel = parseInt(newModule.ModuleLevel);
-    //newModule.ModuleLeader = parseInt(newModule.ModuleLeader);
+  //const handleCancel = () => setShowModal(false);
+  handleCancel = () => setShowModal(false);
+  //const handleSubmit = (newModule) => {
+  handleSubmit = (newModule) => {
+    newModule.ModuleLevel = parseInt(newModule.ModuleLevel);
+    newModule.ModuleLeader = parseInt(newModule.ModuleLeader);
     setModules([...modules, newModule]);
     setShowModal(false);
   }
