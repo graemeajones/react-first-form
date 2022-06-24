@@ -27,12 +27,8 @@ export default function MyModules({ handleSubmit, handleCancel }) {
   }
 
   const handleAdd = () => setShowModal(true);
-  //const handleCancel = () => setShowModal(false);
   handleCancel = () => setShowModal(false);
-  //const handleSubmit = (newModule) => {
   handleSubmit = (newModule) => {
-    newModule.ModuleLevel = parseInt(newModule.ModuleLevel);
-    newModule.ModuleLeader = parseInt(newModule.ModuleLeader);
     setModules([...modules, newModule]);
     setShowModal(false);
   }
