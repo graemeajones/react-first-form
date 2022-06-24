@@ -1,35 +1,23 @@
-import { useState, useEffect } from 'react';
-import { apiRequest }  from '../../api/apiRequest.js';
+import useFetch  from '../../api/useFetch.js';
 import { Form, FormItem, useFormState } from '../../UI/Form.js';
 
 
-export default function AddModuleForm({ onSubmit, onCancel }) {
-  // Properties ----------------------------------
+export default function ModuleForm({ onSubmit, onCancel }) {
+  // Initialisation ----------------------------------
+  const endpoint = "Users";
+  const method = "GET";
+
   const initialModule = {
-    ModuleName: "",
-    ModuleCode: "",
+    ModuleName: "Programming 3",
+    ModuleCode: "CI6001",
     ModuleLevel: 0,
     ModuleLeaderID: 0,
-    ModuleImage: ""
+    ModuleImage: "https://images.freeimages.com/images/small-previews/fa1/cable-5-1243077.jpg"
   };
 
-  const API_URL = 'https://my.api.mockaroo.com/';
-  const API_KEY = '?key=bb6adbc0';
-  
-  // Hooks ---------------------------------------
-  const [loadingMessage, setLoadingMessage] = useState("Loading records ...");
-  const [users, setUsers] = useState(undefined);
-  useEffect(() => { fetchUsers() }, []);
-
-  // Methods -------------------------------------
-  const fetchUsers = async () => {
-    const outcome = await apiRequest(API_URL, 'Users', API_KEY);
-    if (outcome.success) setUsers(outcome.response);
-    else setLoadingMessage(`Error ${outcome.response.status}: Users could not be found.`);
-  }
-
-  // Hooks ---------------------------------------
+  // State ---------------------------------------
   const [module, handleChange, errors, updateErrors] = useFormState(initialModule);
+  const [users, , loadingMessage] = useFetch(endpoint,method);
   
   // Methods -------------------------------------
   const handleSubmit = (event) => {
@@ -49,7 +37,11 @@ export default function AddModuleForm({ onSubmit, onCancel }) {
       ModuleImage: isValidImage ? null : "Module image is not a valid URL"
     });
 
-    if (isValidName && isValidCode && isValidYear && isValidLead && isValidImage) onSubmit(module);
+    if (isValidName && isValidCode && isValidYear && isValidLead && isValidImage) {
+      module.ModuleLevel = parseInt(module.ModuleLevel);
+      module.ModuleLeaderID = parseInt(module.ModuleLeaderID);
+      onSubmit(module);
+    }
   }
 
   const isValidateModuleName = () => module.ModuleName.length > 8 ? true : false;
