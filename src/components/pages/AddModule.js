@@ -1,4 +1,4 @@
-import AddModuleForm from '../entities/Modules/AddModuleForm';
+import ModuleForm from '../entities/Modules/ModuleForm';
 
 
 export default function MyAssessments({ onSubmit, onCancel }) {
@@ -11,7 +11,7 @@ export default function MyAssessments({ onSubmit, onCancel }) {
     <>
       <h1>Add a new module</h1>
       <section>
-        <AddModuleForm onSubmit={onSubmit} onCancel={onCancel} className="Bordered"/>
+        <ModuleForm onSubmit={onSubmit} onCancel={onCancel} className="Bordered"/>
       </section>
     </>
   )
