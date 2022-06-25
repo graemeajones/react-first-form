@@ -16,7 +16,7 @@ export default function Navbar() {
         <NavLink to='/' className={getLinkStyle}>My Modules</NavLink>
       </div>
       <div className="navItem">
-        <NavLink to='/assessments' className={getLinkStyle}>Add Module</NavLink>
+        <NavLink to='/addModule' className={getLinkStyle}>Add Module</NavLink>
       </div>
     </nav>
   )

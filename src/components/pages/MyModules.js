@@ -19,9 +19,7 @@ export default function MyModules({ handleSubmit, handleCancel }) {
   // Methods -------------------------------------
   
   const handleAdd = () => setShowModal(true);
-  //const handleCancel = () => setShowModal(false);
   handleCancel = () => setShowModal(false);
-  //const handleSubmit = (newModule) => {
   handleSubmit = (newModule) => {
     newModule.ModuleID = modules.length+1;
     setModules([...modules, newModule]);
