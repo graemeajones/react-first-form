@@ -11,7 +11,6 @@ export default function useFetch(endpoint,method) {
   const [data, setData] = useState(undefined);
 
   // Methods -------------------------------------
-
   useEffect(() => {
 
     const fetchObjects = async () => {
