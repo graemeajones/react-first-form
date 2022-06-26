@@ -2,28 +2,28 @@ import { useState, useEffect } from 'react';
 import apiRequest from './apiRequest.js';
 
 
-export default function useFetch(endpoint,method) {
+export default function useFace({ gender }) {
   // Properties ----------------------------------
-  const API_URL = 'https://my.api.mockaroo.com/';
-  const API_KEY = '?key=bb6adbc0';
+  const API_URL = 'https://api.generated.photos/api/v1/faces?api_key=xLG_7so-LDyaWH6BEeI1tQ';
+  const endpoint = API_URL + '& per_page=1 & age=young - adult & gender=' + gender;
 
   // Fetch State ---------------------------------
   const [loadingMessage, setLoadingMessage] = useState("Loading records ...");
-  const [data, setData] = useState(undefined);
+  const [face, setFace] = useState(undefined);
 
   // Methods -------------------------------------
   useEffect(() => {
 
-    const fetchObjects = async () => {
-      const outcome = await apiRequest(API_URL, endpoint, API_KEY, method);
-      if (outcome.success) setData(outcome.response);
+    const fetchFace = async () => {
+      const outcome = await apiRequest(endpoint);
+      if (outcome.success) setFace(outcome.response);
       else setLoadingMessage(`Error ${outcome.response.status}: Data could not be found.`);
     };
 
-    fetchObjects();
+    fetchFace();
     
-  }, [endpoint,method]);
+  }, [endpoint]);
 
   // Return --------------------------------------
-  return [data, setData, loadingMessage ];
+  return [face, loadingMessage ];
 }
