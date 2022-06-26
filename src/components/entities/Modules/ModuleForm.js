@@ -1,5 +1,5 @@
 import useFetch  from '../../api/useFetch.js';
-import { Form, FormItem, useFormState } from '../../UI/Form.js';
+import Form from '../../UI/Form.js';
 
 
 export default function ModuleForm({ onSubmit, onCancel }) {
@@ -16,8 +16,8 @@ export default function ModuleForm({ onSubmit, onCancel }) {
   };
 
   // State ---------------------------------------
-  const [module, handleChange, errors, updateErrors] = useFormState(initialModule);
-  const [users, , loadingMessage] = useFetch(endpoint,method);
+  const [module, handleChange, errors, updateErrors] = Form.useFormState(initialModule);
+  const [users, , loadingMessage] = useFetch(endpoint,method); // ", , " - don't need the state modifier
   
   // Methods -------------------------------------
   const handleSubmit = (event) => {
@@ -55,7 +55,7 @@ export default function ModuleForm({ onSubmit, onCancel }) {
   // View ----------------------------------------
   return (
     <Form onSubmit={handleSubmit} onChange={handleChange} onCancel={onCancel} >
-      <FormItem
+      <Form.FormItem
         label="Module name"
         error={errors.ModuleName}
       >
@@ -65,9 +65,9 @@ export default function ModuleForm({ onSubmit, onCancel }) {
           placeholder="Please enter the module name"
           value={module.ModuleName}
         />
-      </FormItem>
+      </Form.FormItem>
       
-      <FormItem
+      <Form.FormItem
         label="Module code"
         error={errors.ModuleCode}
       >
@@ -77,9 +77,9 @@ export default function ModuleForm({ onSubmit, onCancel }) {
           placeholder="Please enter the module code"
           value={module.ModuleCode}
         />
-      </FormItem>
+      </Form.FormItem>
 
-      <FormItem
+      <Form.FormItem
         label="Module level"
         advice="Choose a level between 3 and 7 inclusive"
         error={errors.ModuleLevel}
@@ -89,9 +89,9 @@ export default function ModuleForm({ onSubmit, onCancel }) {
           name="ModuleLevel"
           value={module.ModuleLevel}
         />
-      </FormItem>
+      </Form.FormItem>
 
-      <FormItem
+      <Form.FormItem
         label="Module leader"
         error={errors.ModuleLeaderID}
       >
@@ -114,9 +114,9 @@ export default function ModuleForm({ onSubmit, onCancel }) {
                   }
                 </select>
         }
-      </FormItem>
+      </Form.FormItem>
 
-      <FormItem
+      <Form.FormItem
         label="Module image URL"
         advice="Provide the URL of an image"
         error={errors.ModuleImage}
@@ -126,7 +126,7 @@ export default function ModuleForm({ onSubmit, onCancel }) {
           name="ModuleImage"
           value={module.ModuleImage}
         />
-      </FormItem>
+      </Form.FormItem>
 
     </Form>
   );

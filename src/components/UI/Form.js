@@ -5,7 +5,7 @@ import toCamelCase from '../utils/toCamelCase.js';
 import './Form.scss';
 
 
-export function Form({ children, onSubmit, onChange, onCancel }) {
+export default function Form({ children, onSubmit, onChange, onCancel }) {
   // Properties ----------------------------------
   // Hooks ---------------------------------------
   // Context -------------------------------------
@@ -29,7 +29,7 @@ export function Form({ children, onSubmit, onChange, onCancel }) {
   );
 }
 
-export function FormItem({ children, label, advice=null, error=null, onChange }) {
+function FormItem({ children, label, advice=null, error=null, onChange }) {
   // Properties ----------------------------------
   // Hooks ---------------------------------------
   // Context -------------------------------------
@@ -56,10 +56,10 @@ export function FormItem({ children, label, advice=null, error=null, onChange })
   );
 }
 
-export const useFormState = (initialFormObject) => {
+const useFormState = (initialFormObject) => {
 
   if (!initialFormObject || (initialFormObject === {}))
-    throw new Error("[useFormState] Inital form object with keys must be provided");
+    throw new Error("[useFormState] An initial form object must be provided");
     
   // Form State ----------------------------------
   const [formObject, setFormObject] = useState(initialFormObject);
@@ -72,3 +72,7 @@ export const useFormState = (initialFormObject) => {
   // Return --------------------------------------
   return [formObject, handleChange, errorObject, setErrorObject ];
 }
+
+
+Form.FormItem = FormItem;
+Form.useFormState = useFormState;
